@@ -18,7 +18,7 @@ go build .
 ```
 Usage of steamcmd-2fa:
   -path string
-        Path to steamcmd executable (default "C:\\steamcmd\\steamcmd.exe", "/home/steamcmd/steamcmd", "/home/steamcmd/steamcmd.sh")
+        Path to steamcmd executable (default "C:\\steamcmd\\steamcmd.exe", "/home/steam/steamcmd", "/home/steam/steamcmd.sh")
   -username string
         Username to log in with
   -password string
