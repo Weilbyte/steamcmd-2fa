@@ -2,7 +2,7 @@
 
 A simple tool that automatically generates a 2FA Steam Guard code and then runs `steamcmd` with that login and the rest of your arguments.
 
-I wanted to run certain steamcmd commands during CI and did not want to face the hurdles of disabling Steam Guard, nor did I want to build an SMTP client that fetches the code, so I built this simple tool based on [go-steam-totp](github.com/fortis/go-steam-totp) that generates a code on-the-fly and runs steamcmd with it.
+I wanted to run certain steamcmd commands during CI and did not want to face the hurdles of disabling Steam Guard, nor did I want to build an SMTP client that fetches the code, so I built this simple tool based on [go-steam-totp](https://github.com/fortis/go-steam-totp) that generates a code on-the-fly and runs steamcmd with it.
 
 ## Installation
 
