@@ -19,6 +19,8 @@ go build .
 Usage of steamcmd-2fa:
   -path string
         Path to steamcmd executable (default "C:\\steamcmd\\steamcmd.exe", "/home/steam/steamcmd", "/home/steam/steamcmd.sh")
+  -code-only
+        Only prints out the code without wrapping around steamcmd
   -username string
         Username to log in with
   -password string
@@ -30,6 +32,8 @@ Usage of steamcmd-2fa:
 ```
 
 For example, instead of running `steamcmd +login exampleuser examplepass +quit`, you would run `steamcmd-2fa --path /home/steam/steamcmd --username exampleuser --password examplepass --seed YOUR2FASEED --args "+quit"`. 
+
+Or you can simply run `steamcmd-2fa --username exampleuser --password examplepass --seed YOUR2FASEED --code-only` to get only the code, which then you can supply to steamcmd's login command directly.
 
 You can get your 2FA seed by [various methods](https://github.com/SteamTimeIdler/stidler/wiki/Getting-your-%27shared_secret%27-code-for-use-with-Auto-Restarter-on-Mobile-Authentication). Your seed here is the `shared_secret`.
 
