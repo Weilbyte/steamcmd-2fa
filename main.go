@@ -36,17 +36,20 @@ func attemptFindSteamcmd() string {
 	}
 }
 
-func parseArgs() (string, string, string, string, string) {
+func parseArgs() (string, string, string, string, string, bool) {
 	steamcmdPath := flag.String("path", attemptFindSteamcmd(), "Path to steamcmd executable")
 	steamcmdArgs := flag.String("args", "", "Arguments to pass to steamcmd")
 	steamcmdUser := flag.String("username", "", "Username to log in with")
 	steamcmdPass := flag.String("password", "", "Password to log in with")
+	codeOnly := flag.Bool("code-only", false, "Only prints out the code without wrapping around steamcmd")
 	tfaSeed := flag.String("seed", "", "The 2FA seed/secret")
 	flag.Parse()
 
 	if !fileExist(*steamcmdPath) {
-		fmt.Println("Provided steamcmd path is invalid.")
-		os.Exit(1)
+		if !*codeOnly {
+			fmt.Println("Provided steamcmd path is invalid.")
+			os.Exit(1)
+		}
 	}
 
 	if *steamcmdUser == "" || *steamcmdPass == "" {
@@ -59,18 +62,21 @@ func parseArgs() (string, string, string, string, string) {
 		os.Exit(1)
 	}
 
-	return *steamcmdPath, *steamcmdArgs, *steamcmdUser, *steamcmdPass, *tfaSeed
+	return *steamcmdPath, *steamcmdArgs, *steamcmdUser, *steamcmdPass, *tfaSeed, *codeOnly
 }
 
 func main() {
-	path, args, user, pass, seed := parseArgs()
-
-	fmt.Println(path)
+	path, args, user, pass, seed, codeOnly := parseArgs()
 
 	code, err := steam_totp.GenerateAuthCode(seed, time.Now())
 	if err != nil {
 		fmt.Println("Error while generating code: ", err)
 		os.Exit(1)
+	}
+
+	if codeOnly {
+		fmt.Println(code)
+		os.Exit(0)
 	}
 
 	commandArgs := fmt.Sprintf("+login %s %s %s %s", user, pass, code, args)
