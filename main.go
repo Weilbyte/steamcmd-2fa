@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fortis/go-steam-totp"
+	steam_totp "github.com/fortis/go-steam-totp"
 )
 
 func fileExist(path string) bool {
@@ -23,7 +23,7 @@ func fileExist(path string) bool {
 func attemptFindSteamcmd() string {
 	windowsPath := "C:\\steamcmd\\steamcmd.exe"
 	unixPath := "/home/steam/steamcmd"
-	dockerPath := "/home/steam/steamcmd.sh"
+	dockerPath := "/home/steam/steamcmd/steamcmd.sh"
 
 	if runtime.GOOS == "windows" {
 		return windowsPath
