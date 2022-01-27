@@ -1,0 +1,8 @@
+[package]
+name = "steamcmd-2fa"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+simple-steam-totp = "0.1.0"
+clap = { version = "3.0.7", features = ["derive"] }
