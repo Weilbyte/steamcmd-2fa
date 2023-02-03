@@ -53,12 +53,13 @@ fn main() {
         }
     };
 
-    let cmd_arg = format!("+login {} {} {} {}", &args.username, &args.password, &totp, &args.args);
+    let status = std::process::Command::new(&args.path)
+        .arg("+login")
+        .arg(&args.username)
+        .arg(&args.password)
+        .arg(&totp)
+        .args(args.args.split(' '))
+        .status();
 
-    let mut cmd = std::process::Command::new(&args.path);
-    cmd.arg(&cmd_arg);
-    
-    println!("{} {:?}\n", &args.path, &cmd_arg.replace(&args.username, "****").replace(&args.password, "****").replace(&totp, "****"));
-
-    std::process::exit(cmd.status().unwrap().code().unwrap());
+    std::process::exit(status.unwrap().code().unwrap());
 }
